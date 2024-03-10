@@ -1,9 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+import eslintPlugin from 'vite-plugin-eslint';
+
 export default defineNuxtConfig({
-<<<<<<< Updated upstream
-  devtools: { enabled: true }
-})
-=======
   app: {
     head: {
       title: 'GR Finanse',
@@ -77,4 +76,3 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
 });
->>>>>>> Stashed changes
