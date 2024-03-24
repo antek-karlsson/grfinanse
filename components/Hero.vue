@@ -8,33 +8,34 @@
 </template>
 
 <script lang="ts" setup>
-import { collection } from 'firebase/firestore';
-import { ref as storageRef } from 'firebase/storage';
-import { useFirebaseStorage } from 'vuefire';
+import { useTitleStore } from '~/store/title';
+import type { Title } from '~/types';
 
-const db = useFirestore();
-const storage = useFirebaseStorage();
+const store = useTitleStore();
+const { getImgUrl } = useFirebase();
 
-const titleCol = useCollection(collection(db, 'title'));
+const url = ref<string>();
 
-const activeItem = computed(() => titleCol.value.find((item) => item.active));
+const titleObject = ref<Title>();
+const bgImgUrl = ref<string>();
 
-const title = computed(() => activeItem.value.title);
-const background = computed(() => activeItem.value.background);
-const textColor = computed(() => activeItem.value.text_color);
-const subtitle = computed(() => activeItem.value.subtitle);
+const title = computed(() => titleObject.value?.title);
+const background = computed(() => titleObject.value?.background);
+const subtitle = computed(() => titleObject.value?.subtitle);
+const textColor = computed(() => titleObject.value?.text_color);
 
-const bgFileRef = storageRef(storage, background.value);
-const { url, refresh } = useStorageFileUrl(bgFileRef);
-const bgImgUrl = computed(() => `url(${url.value})`);
-
-watch(background, async () => {
-  await refresh();
-});
-
-onMounted(async () => {
-  await nextTick();
-  await refresh();
+onMounted(() => {
+  watch(
+    store,
+    async () => {
+      if (store.activeTitle) {
+        titleObject.value = store.activeTitle;
+        url.value = await getImgUrl(background.value);
+        bgImgUrl.value = `url(${url.value})`;
+      }
+    },
+    { immediate: true },
+  );
 });
 </script>
 
