@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+import { defineNuxtConfig } from 'nuxt/config';
 import eslintPlugin from 'vite-plugin-eslint';
 
 export default defineNuxtConfig({
@@ -65,6 +66,6 @@ export default defineNuxtConfig({
       firebaseAppId: process.env.NUXT_PUBLIC_FIREBASE_APP_ID,
     },
   },
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', 'nuxt-swiper', '@vueuse/nuxt'],
   devtools: { enabled: true },
 });
