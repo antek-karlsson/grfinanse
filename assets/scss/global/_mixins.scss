@@ -1,0 +1,68 @@
+@mixin section-padding {
+  padding-inline: $section-px-mobile;
+  padding-block: $section-py-mobile;
+
+  @include tablet {
+    padding-inline: $section-px-tablet;
+    padding-block: $section-py-tablet;
+  }
+
+  @include desktop {
+    padding-inline: $section-px-desktop;
+    padding-block: $section-py-desktop;
+  }
+}
+
+@mixin title {
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1.33;
+
+  @include tablet {
+    font-weight: 800;
+    font-size: 2.4rem;
+    line-height: 1.33;
+  }
+
+  @include desktop {
+    font-weight: 800;
+    font-size: 3.2rem;
+    line-height: 1.33;
+  }
+}
+
+@mixin sub-title {
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+
+  @include tablet {
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+  }
+
+  @include desktop {
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+  }
+}
+
+@mixin text {
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.5;
+
+  @include tablet {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+
+  @include desktop {
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+}

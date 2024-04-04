@@ -2,7 +2,7 @@
   <div class="hero">
     <div class="hero__content">
       <h1 class="hero__title">{{ title }}</h1>
-      <h2 v-if="subtitle">{{ subtitle }}</h2>
+      <h2 v-if="subtitle" class="hero__subtitle">{{ subtitle }}</h2>
     </div>
   </div>
 </template>
@@ -13,8 +13,6 @@ import type { Title } from '~/types';
 
 const store = useTitleStore();
 const { getImgUrl } = useFirebase();
-
-const url = ref<string>();
 
 const titleObject = ref<Title>();
 const bgImgUrl = ref<string>();
@@ -30,8 +28,8 @@ onMounted(() => {
     async () => {
       if (store.activeTitle) {
         titleObject.value = store.activeTitle;
-        url.value = await getImgUrl(background.value);
-        bgImgUrl.value = `url(${url.value})`;
+        const url = await getImgUrl(background.value);
+        bgImgUrl.value = `url(${url})`;
       }
     },
     { immediate: true },
@@ -61,8 +59,29 @@ onMounted(() => {
 
   &__title {
     color: v-bind(textColor);
-    font-size: 5.6rem;
+    font-size: 3.6rem;
     font-weight: bold;
+
+    @include tablet {
+      font-size: 4.8rem;
+    }
+
+    @include desktop {
+      font-size: 6.4rem;
+    }
+  }
+
+  &__subtitle {
+    color: v-bind(textColor);
+    font-size: 1.4rem;
+
+    @include tablet {
+      font-size: 1.8rem;
+    }
+
+    @include desktop {
+      font-size: 2.4rem;
+    }
   }
 }
 </style>
