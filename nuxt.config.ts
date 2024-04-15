@@ -1,7 +1,8 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-
 import { defineNuxtConfig } from 'nuxt/config';
 import eslintPlugin from 'vite-plugin-eslint';
+import svgLoader from 'vite-svg-loader';
+import UnpluginComponentsVite from 'unplugin-vue-components/vite';
+import IconsResolver from 'unplugin-icons/resolver';
 
 export default defineNuxtConfig({
   app: {
@@ -33,7 +34,18 @@ export default defineNuxtConfig({
   },
   css: ['@/assets/scss/common/index.scss'],
   vite: {
-    plugins: [eslintPlugin({ failOnError: false })],
+    plugins: [
+      eslintPlugin({ failOnError: false }),
+      svgLoader(),
+      UnpluginComponentsVite({
+        dts: true,
+        resolvers: [
+          IconsResolver({
+            prefix: 'Icon',
+          }),
+        ],
+      }),
+    ],
     build: {
       target: 'esnext',
       commonjsOptions: {
@@ -66,6 +78,6 @@ export default defineNuxtConfig({
       firebaseAppId: process.env.NUXT_PUBLIC_FIREBASE_APP_ID,
     },
   },
-  modules: ['@pinia/nuxt', 'nuxt-swiper', '@vueuse/nuxt'],
+  modules: ['unplugin-icons/nuxt', '@vueuse/nuxt', 'nuxt-swiper', ['@pinia/nuxt', { autoImports: ['defineStore'] }]],
   devtools: { enabled: true },
 });

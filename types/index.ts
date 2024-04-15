@@ -4,10 +4,13 @@ interface Link {
 }
 
 export interface Card {
-  image: string;
-  link: Link;
-  text: string;
-  title: string;
+  type: 'card';
+  value: {
+    image?: string;
+    link?: Link;
+    text: string;
+    title: string;
+  };
 }
 export interface Title {
   id: string;
@@ -27,6 +30,31 @@ export interface Section {
   text?: string;
   link?: Link;
   is_dark: boolean;
+  card?: Card[];
   cards?: Card[];
   order: number;
+}
+
+interface Contact {
+  city: string;
+  email: string;
+  street: string;
+  telephone: string;
+  title: string;
+  zip_code: string;
+}
+
+interface Logo {
+  type: 'logo';
+  value: {
+    image: string;
+    name: string;
+    link: string;
+  };
+}
+
+export interface Footer {
+  contact: Contact;
+  logos: Logo[];
+  active: boolean;
 }
