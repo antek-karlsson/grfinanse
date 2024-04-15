@@ -49,6 +49,18 @@
   }
 }
 
+@mixin sub-title-card {
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+
+  @include desktop-lg {
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+  }
+}
+
 @mixin text {
   font-weight: 400;
   font-size: 1.2rem;
@@ -63,6 +75,18 @@
   @include desktop {
     font-weight: 400;
     font-size: 1.6rem;
+    line-height: 1.5;
+  }
+}
+
+@mixin text-card {
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.5;
+
+  @include desktop-lg {
+    font-weight: 400;
+    font-size: 1.4rem;
     line-height: 1.5;
   }
 }

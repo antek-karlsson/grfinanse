@@ -1,10 +1,12 @@
 <template>
   <div>
     <main>
-      <slot />
-      <!-- TODO: Create footer component -->
-      <!-- <Footer />  -->
+      <Navbar />
+      <div class="content">
+        <slot />
+      </div>
     </main>
+    <Footer />
   </div>
 </template>
 
@@ -14,7 +16,12 @@
 main {
   max-width: 100vw;
   min-height: 100vh;
+  height: 100%;
   background-color: $main-bg;
   font-family: $poppins;
+}
+
+.content {
+  margin-top: 145px;
 }
 </style>
