@@ -25,7 +25,6 @@ onMounted(() => {
     },
     { immediate: true },
   );
-  window.addEventListener('scroll', () => console.log('scrolling'));
 });
 </script>
 

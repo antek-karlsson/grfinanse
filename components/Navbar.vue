@@ -56,12 +56,12 @@ const navbar = ref<HTMLElement>();
 const isNavOpen = ref(false);
 const isNavVisible = ref(true);
 const lastScrollPosition = ref(0);
-const Y = ref(0);
 
 const isScreenMobile = useMediaQuery('(max-width: 599px)');
 const route = useRoute();
 
 const currentRoute = computed(() => route.path);
+const navbarHeight = computed(() => navbar.value?.getBoundingClientRect().height || 0);
 
 function toggleMobileNav() {
   isNavOpen.value = !isNavOpen.value;
@@ -69,13 +69,12 @@ function toggleMobileNav() {
 
 function onScroll() {
   const currentScrollPosition = window.scrollY;
-  if (currentScrollPosition < 0 || Math.abs(currentScrollPosition - lastScrollPosition.value) < 60) {
+  if (currentScrollPosition < 0 || Math.abs(currentScrollPosition - lastScrollPosition.value) < navbarHeight.value) {
     return;
   }
 
   isNavVisible.value = currentScrollPosition < lastScrollPosition.value;
   lastScrollPosition.value = currentScrollPosition;
-  console.log(lastScrollPosition.value);
 }
 
 watch(currentRoute, () => {
@@ -87,11 +86,6 @@ watch(isScreenMobile, () => {
 });
 
 onMounted(() => {
-  const { y } = useWindowScroll();
-
-  watch(y, () => {
-    Y.value = y.value;
-  });
   window.addEventListener('scroll', onScroll);
 });
 
@@ -106,7 +100,7 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   right: 0;
-  background-color: $white;
+  background-color: $section-light-bg;
   z-index: 2;
   transform: translate3d(0, 0, 0);
   transition: 0.3s all ease-out;
@@ -171,7 +165,7 @@ onUnmounted(() => {
       align-items: flex-end;
       position: absolute;
       top: 12.4rem;
-      background-color: $white;
+      background-color: $section-light-bg;
       z-index: 100;
       padding: 2.5rem;
     }
@@ -197,9 +191,6 @@ onUnmounted(() => {
       border-bottom: 1px solid $black;
     }
   }
-}
-
-.router-link-active {
 }
 
 .navbar.hidden {

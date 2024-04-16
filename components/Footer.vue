@@ -38,11 +38,9 @@ onMounted(() => {
     if (store.activeFooter) {
       footer.value = store.activeFooter;
       const logoValues = footer.value.logos.map((logo) => logo.value);
-      console.log(logoValues);
       const items: Footer['logos'][number]['value'][] = [];
       for (const logo of logoValues) {
         const item = { name: logo.name, image: await getImgUrl(logo.image), link: logo.link };
-        console.log(item);
 
         if (item) {
           items.push(item);
