@@ -32,6 +32,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  routeRules: {
+    '/': { redirect: '/klient' },
+  },
   css: ['@/assets/scss/common/index.scss'],
   vite: {
     plugins: [
