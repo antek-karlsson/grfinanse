@@ -11,7 +11,7 @@ const rodo = ref();
 onMounted(async () => {
   await store.fetchRodo();
   if (store.activeRodo) {
-    rodo.value = store.activeRodo.rodo;
+    rodo.value = store.activeRodo.content;
   }
 });
 </script>

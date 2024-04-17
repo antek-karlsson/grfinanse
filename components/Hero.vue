@@ -9,9 +9,20 @@
 
 <script lang="ts" setup>
 import { useTitleStore } from '~/store/title';
+import { usePartnerTitleStore } from '~/store/partnerTitle';
 import type { Title } from '~/types';
 
-const store = useTitleStore();
+const props = withDefaults(
+  defineProps<{
+    forPartner: boolean;
+  }>(),
+  {
+    forPartner: false,
+  },
+);
+
+const titleStore = useTitleStore();
+const partnerTitleStore = usePartnerTitleStore();
 const { getImgUrl } = useFirebase();
 
 const titleObject = ref<Title>();
@@ -23,17 +34,31 @@ const subtitle = computed(() => titleObject.value?.subtitle);
 const textColor = computed(() => titleObject.value?.text_color);
 
 onMounted(() => {
-  watch(
-    store,
-    async () => {
-      if (store.activeTitle) {
-        titleObject.value = store.activeTitle;
-        const url = await getImgUrl(background.value);
-        bgImgUrl.value = `url(${url})`;
-      }
-    },
-    { immediate: true },
-  );
+  if (props.forPartner) {
+    watch(
+      partnerTitleStore,
+      async () => {
+        if (partnerTitleStore.activeTitle) {
+          titleObject.value = partnerTitleStore.activeTitle;
+          const url = await getImgUrl(background.value);
+          bgImgUrl.value = `url(${url})`;
+        }
+      },
+      { immediate: true },
+    );
+  } else {
+    watch(
+      titleStore,
+      async () => {
+        if (titleStore.activeTitle) {
+          titleObject.value = titleStore.activeTitle;
+          const url = await getImgUrl(background.value);
+          bgImgUrl.value = `url(${url})`;
+        }
+      },
+      { immediate: true },
+    );
+  }
 });
 </script>
 

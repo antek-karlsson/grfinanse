@@ -7,11 +7,15 @@
 
 <script setup lang="ts">
 import { useTitleStore } from '@/store/title';
+import { usePartnerTitleStore } from '@/store/partnerTitle';
 import { useSectionsStore } from '@/store/sections';
+import { usePartnerSectionsStore } from '@/store/partnerSections';
 import { useFooterStore } from '@/store/footer';
 
 const { fetchTitleArray } = useTitleStore();
+const { fetchTitleArray: fetchPartnerTitleArray } = usePartnerTitleStore();
 const { fetchSections } = useSectionsStore();
+const { fetchSections: fetchPartnerSections } = usePartnerSectionsStore();
 const { fetchFooter } = useFooterStore();
 
 const isLoading = ref(true);
@@ -19,7 +23,9 @@ const isLoading = ref(true);
 onMounted(async () => {
   await fetchTitleArray();
   await fetchSections();
+  await fetchPartnerSections();
   await fetchFooter();
+  await fetchPartnerTitleArray();
 
   const imageLoadPromises = Array.from(document.images).map((img) =>
     img.complete && img.naturalHeight !== 0

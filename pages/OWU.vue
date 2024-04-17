@@ -10,7 +10,7 @@ const owu = ref();
 
 onMounted(async () => {
   await store.fetchOwu();
-  owu.value = store.activeOwu.owu;
+  owu.value = store.activeOwu.content;
 });
 </script>
 

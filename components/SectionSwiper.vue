@@ -35,7 +35,7 @@ const modules = [SwiperA11y, SwiperPagination, SwiperNavigation];
   :deep(.swiper-button-prev),
   :deep(.swiper-button-next) {
     background-color: $black;
-    top: 25%;
+    top: 100%;
     color: $white;
 
     &::after {
