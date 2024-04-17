@@ -20,7 +20,7 @@
       <div :class="['section__content', { 'section__content--single': !showImage }]">
         <h3 v-if="data.title" class="section__title">{{ data.title }}</h3>
         <h4 v-if="data.subtitle" class="section__subtitle">{{ data.subtitle }}</h4>
-        <p class="section__text">{{ data.text }}</p>
+        <div class="section__text" v-html="data.text" />
         <ButtonLink v-if="showButton" class="section__button" :href="data.link.url" :variant="buttonVariant">
           {{ data.link.text }}</ButtonLink
         >
@@ -147,6 +147,7 @@ onMounted(async () => {
   &--cards-no-swiper {
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: baseline;
   }
 
   &--w-bg-image {
@@ -163,7 +164,7 @@ onMounted(async () => {
   }
 
   &__image {
-    width: 100%;
+    max-width: 100%;
     height: auto;
 
     @include desktop {
@@ -209,6 +210,13 @@ onMounted(async () => {
 
   &__text {
     @include text;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+
+    :deep(strong) {
+      font-weight: bold;
+    }
   }
 
   &__button {

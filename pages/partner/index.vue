@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <Hero />
+    <Hero for-partner />
     <div class="index__sections">
       <Section v-for="(section, id) in sections" :key="id" :data="section" />
     </div>
@@ -8,10 +8,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useSectionsStore } from '~/store/sections';
+import { usePartnerSectionsStore } from '~/store/partnerSections';
 import type { Section } from '~/types';
 
-const store = useSectionsStore();
+const store = usePartnerSectionsStore();
 
 const sections = ref<Section[]>();
 

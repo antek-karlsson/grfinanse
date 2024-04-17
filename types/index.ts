@@ -6,10 +6,12 @@ interface Link {
 export interface Card {
   type: 'card';
   value: {
-    image?: string;
-    link?: Link;
-    text: string;
-    title: string;
+    card: {
+      image?: string;
+      link?: Link;
+      text: string;
+      title: string;
+    };
   };
 }
 export interface Title {
